@@ -25,19 +25,22 @@ struct MissionView: View {
                         .scaledToFit()
                         .frame(maxWidth: geometry.size.width * 0.7)
                         .padding(.top)
-
+                    
+                    Text("Date: \(mission.formattedLaunchDate)")
+                        .font(.headline)
+                        .bold()
+                    
                     Text(self.mission.description)
                         .padding()
                     
                     ForEach(self.astronauts, id: \.role) { crewMember in
-                        NavigationLink(destination: AstronautView(astronaut: crewMember.astronaut)) {
+                        NavigationLink(destination: AstronautView(astronaut: crewMember.astronaut, missions: [Mission]())) {
                             HStack {
                                 Image(crewMember.astronaut.id)
                                     .resizable()
                                     .frame(width: 83, height: 60)
                                     .clipShape(Capsule())
                                     .overlay(Capsule().stroke(Color.primary, lineWidth: 1))
-                                
                                 VStack(alignment: .leading) {
                                     Text(crewMember.astronaut.name)
                                         .font(.headline)
